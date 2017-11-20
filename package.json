@@ -1,6 +1,6 @@
 {
   "name": "sissi-guides",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Router and Links built for sissi (simple static sites)",
   "main": "lib/index.js",
   "repository": "https://github.com/AlexKott/sissi-guides",
