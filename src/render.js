@@ -10,9 +10,11 @@ import ReactDOM from 'react-dom';
 import transformToRoutes from './transformToRoutes';
 import SissiPage from './SissiPage';
 
-export default async (EntryComponent) => {
-  const response = await fetch('/sissi/__content__');
-  const content = await response.json();
+export default async (EntryComponent, content) => {
+  if (process.env.NODE_ENV === 'production') {
+    const response = await fetch('/sissi/__content__');
+    content = await response.json();
+  }
 
   ReactDOM.render(
     <SissiPage routes={transformToRoutes(content)}>
