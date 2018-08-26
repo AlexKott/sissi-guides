@@ -2,6 +2,8 @@ if (! window._babelPolyfill) {
   require('@babel/polyfill');
 }
 
+import 'whatwg-fetch';
+import 'raf/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
