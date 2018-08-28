@@ -9,7 +9,14 @@ const SissiPage = ({ routes = [], children }) => (
       {routes.map(route => {
         const childrenWithProps = React.cloneElement(children, { ...route });
 
-        return <Route key={route.path} exact path={route.path} render={() => childrenWithProps} />;
+        return (
+          <Route
+            exact
+            key={route.path === '' ? route.path : 'index'}
+            path={route.path}
+            render={() => childrenWithProps}
+          />
+        );
       })}
     </div>
   </BrowserRouter>
