@@ -1,25 +1,34 @@
-if (! window._babelPolyfill) {
-  require('@babel/polyfill');
-}
-
-import 'whatwg-fetch';
 import 'raf/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactDOMServer from 'react-dom/server';
+import {
+  BrowserRouter,
+  StaticRouter,
+} from 'react-router-dom';
 
-import transformToRoutes from './transformToRoutes';
-import SissiPage from './SissiPage';
+import buildRouteContent from './buildRouteContent';
+import SissiRoutes from './SissiRoutes';
 
-export default async (EntryComponent, content) => {
-  if (process.env.NODE_ENV === 'production') {
-    const response = await fetch('/sissi/__content__');
-    content = await response.json();
+export function render(EntryComponent, content) {
+  if (process.env.NODE_ENV === 'development') {
+    ReactDOM.render(
+      <BrowserRouter>
+        <SissiRoutes routes={buildRouteContent(content)}>
+          <EntryComponent />
+        </SissiRoutes>
+      </BrowserRouter>,
+      document.querySelector('#sissi')
+    );
   }
+}
 
-  ReactDOM.render(
-    <SissiPage routes={transformToRoutes(content)}>
-      <EntryComponent />
-    </SissiPage>,
-    document.querySelector('#sissi')
+export function renderStatic(EntryComponent, content, url) {
+  return ReactDOMServer.renderToStaticMarkup(
+    <StaticRouter location={url} context={{}}>
+      <SissiRoutes routes={buildRouteContent(content)}>
+        <EntryComponent />
+      </SissiRoutes>
+    </StaticRouter>
   );
 }
