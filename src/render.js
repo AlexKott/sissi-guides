@@ -23,7 +23,8 @@ export function render(EntryComponent, content) {
   }
 }
 
-export function renderStatic(EntryComponent, content, url) {
+export function renderStatic(EntryComponent, content, path) {
+  const url = /^\//.test(path) ? path : `/${path}`;
   return ReactDOMServer.renderToStaticMarkup(
     <StaticRouter location={url} context={{}}>
       <SissiRoutes routes={buildRouteContent(content)}>
