@@ -4,9 +4,10 @@ export default content =>
     const isSinglePage = content.global._items.length === 1;
 
     return {
-      path: isSinglePage ? '' : `/${page.path}`,
+      global: content.global,
       page,
+      pages: content.global._items.map(pageId => content.pages[pageId]),
+      path: isSinglePage ? '' : `/${page.path}`,
       sections: page._items.map(sectionId => content.sections[sectionId]),
-      content,
     };
   });
