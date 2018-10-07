@@ -10,7 +10,7 @@ const SissiRoutes = ({ routes = [], children }) => (
       return (
         <Route
           exact
-          key={route.path === '' ? route.path : 'index'}
+          key={route.path === '' ? 'index' : route.path}
           path={route.path}
           render={() => childrenWithProps}
         />

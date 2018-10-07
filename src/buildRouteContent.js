@@ -1,7 +1,12 @@
-export default (content) =>
-  content.pages.map(page => ({
-    path: content.pages.length > 1 ? `/${page.path}` : undefined,
-    page,
-    sections: page.sections.map(sectionId => ({ ...content.sections[sectionId], id: sectionId })),
-    content,
-  }));
+export default content =>
+  content.global._items.map(pageId => {
+    const page = content.pages[pageId];
+    const isSinglePage = content.global._items.length === 1;
+
+    return {
+      path: isSinglePage ? '' : `/${page.path}`,
+      page,
+      sections: page._items.map(sectionId => content.sections[sectionId]),
+      content,
+    };
+  });
