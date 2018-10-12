@@ -1,82 +1,33 @@
-# sissi-guides
+# sissi-guides – routing solution for [sissi]
 
-## Introduction
-_Sissi-guides_ is part of [sissi](https://github.com/AlexKott/sissi), a simple static site generator. Because _sissi_ doesn't like to do everything on herself, she employs some modules who can help. _Sissi_ is still young and the modules might change from time to time to adjust to her different life situations.
+<img src='https://raw.githubusercontent.com/square-a/sissi/master/sissi.png'  width='160px' />
 
-Of course you can use _sissi-guides_ independently as well if it fits your needs. Just consider that the main goal for the module is, to make _sissi_ happy. Everything else is just an extra.
+Hi, it’s me again. *sissi*, your ***si**mple **s**tatic **si**tes* generator.
 
-## Installation
-When you're asking for _sissi_, _sissi-guides_ is already included. For every other use case just do the usual:
+If you want to turn your simple React app into a static site with a built-in CMS look no further! Or actually, do: [the sissi repo][sissi] is where you'll find all you need. See you there!
 
-`yarn add sissi-guides`
+If you're a sissi fan and want to contribute – welcome! I'm glad you're here. I have to apologise, though. Please bear with me. I have but two parents and they are working hard on their sissi-to-do-lists. *Contribution guidelines* and *thorough documentation of all packages* are somewhere in there. Somewhere... For now, this will have to do:
 
-or
+## What sissi-guides can do
+*sissi-guides* is basically a wrapper for [ReactRouter](https://github.com/ReactTraining/react-router/) and provides a `render()` function and a `SissiLink` component.
 
-`npm i sissi-guides`
+### render(Component, content)
+The `render()` function is used in [sissi] projects and takes a *React Component* and a *content* object (the imported `content.json`). It then maps the *pages* and renders the given component for each page, enhanced with the following content props:
 
-## Usage
-_Sissi-guides_ has two exports which you can use inside your _sissi_ project.
-
-### render
-
-```
-import { render } from 'sissi-guides';
-
-import App from './App';
-import routes from './routes';
-
-render(App, routes);
-```
-
-_render_ is not much more than a wrapper around _ReactDOM_ and _ReactRouter_. It takes a _EntryComponent_ and the array with all your _routes_:
-
-```
-export default [
-  {
-    path: '/',
-    text: 'Hello',
-  },
-  {
-    path: '/about',
-    text: 'About me',
-  },
-]
-```
-
-Each route needs a _path_ attribute and can contain any data that will get passed through to your _EntryComponent_:
-
-```
-import React from 'react';
-
-export default ({ text }) => <strong>{text}</strong>;
-```
-
-Easy as this you'll see __Hello__ on `/` and __About me__ on `/about`.
-
+| Key | Type | Notes |
+| - | - | - |
+| content | object | the full content object |
+| global | object | the global content |
+| page | object | the current page |
+| pages | object[] | all pages |
+| path | string | the path of the current page |
+| sections | object[] | the sections of the current page |
 
 ### SissiLink
-```
-import { SissiLink } from 'sissi-guides';
+`SissiLink` is a wrapper for the [ReactRouter Link](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/Link.md) component and supports all its main features.
 
-export default () => (
-  <SissiLink to='/about'>
-    Read more about me
-  </SissiLink>
-);
-```
-Of course you'll want to provide links to all your pages. _SissiLink_ is a simple wrapper around _ReactRouter_'s `Link`-Component. The only thing it adds is one attribute:
-
-```
-<a href="/about" data-type="sissi-internal">Read more about me</a>
-```
-
-This is important for [sissi-snaps](https://github.com/AlexKott/sissi-snaps), since it will only crawl through links marked with this attribute.
-
-## Contributing
-This is just one of several things that _sissi_ needs for her well being. It is important to keep all settings focussed on her so that she'll always be the center.
-
-Feel free to open an issue or [get in touch](https://alexkott.com), if you're interested in helping _sissi_ through her childhood or see some parenting mistake that you'd like to fix.
+It also adds the `data-type="sissi-internal"` attribute which is used by [sissi-snaps] to determine which pages to snapshot.
 
 
-## Credits
-_Sissi-guides_ is just a wrapper around [react-router](https://github.com/ReactTraining/react-router/).
+[sissi]:https://github.com/square-a/sissi
+[sissi-snaps]:https://github.com/square-a/sissi-snaps
