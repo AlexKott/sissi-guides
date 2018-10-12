@@ -4,6 +4,7 @@ export default content =>
     const isSinglePage = content.global._items.length === 1;
 
     return {
+      content,
       global: content.global,
       page,
       pages: content.global._items.map(pageId => content.pages[pageId]),
