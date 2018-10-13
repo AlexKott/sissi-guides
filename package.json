@@ -1,7 +1,7 @@
 {
   "name": "sissi-guides",
   "description": "Router and Links built for sissi (simple static sites)",
-  "version": "1.5.3",
+  "version": "2.0.0",
   "license": "GPL-3.0-or-later",
   "repository": "square-a/sissi-guides",
   "author": "A Square",
